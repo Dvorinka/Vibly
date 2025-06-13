@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibly - Moderní Kreativní Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Paytone One', sans-serif;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(241, 239, 239);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            animation: pulse-slow 2s infinite;
+        }
+
+        .jumping-letters {
+            display: inline-block;
+        }
+
+        .jumping-letters span {
+            display: inline-block;
+            font-family: 'Paytone One', sans-serif;
+            font-size: 2rem;
+            color: rgb(0, 0, 0);
+            animation: jump 1s infinite;
+        }
+
+        .jumping-letters span:nth-child(2) { animation-delay: 0.1s; }
+        .jumping-letters span:nth-child(3) { animation-delay: 0.2s; }
+        .jumping-letters span:nth-child(4) { animation-delay: 0.3s; }
+        .jumping-letters span:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .bg-light { background-color: rgb(241, 239, 239); }
+        .bg-dark { background-color: rgb(77, 77, 77); }
+        .bg-black { background-color: rgb(0, 0, 0); }
+        .text-light { color: rgb(241, 239, 239); }
+        .text-dark { color: rgb(77, 77, 77); }
+        .text-black { color: rgb(0, 0, 0); }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text {
+            background: linear-gradient(135deg, rgb(0, 0, 0) 0%, rgb(77, 77, 77) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .coming-soon-text {
+            font-family: 'Paytone One', sans-serif;
+            background: linear-gradient(135deg, rgb(0, 0, 0) 0%, rgb(77, 77, 77) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+
+        /* Custom Cursor Styles */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: black;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        #cursor-blur {
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-grow {
+            width: 40px !important;
+            height: 40px !important;
+        }
+    </style>
+</head>
+<body class="bg-light text-black">
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+    <div id="cursor-blur" style="display: none;"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="assets/logo/logo-ba.png" alt="Vibly Logo" class="preloader-logo">
+            <div class="jumping-letters">
+                <span>V</span>
+                <span>i</span>
+                <span>b</span>
+                <span>l</span>
+                <span>y</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="relative z-10 text-center px-4">
+            <div class="flex justify-center mb-12">
+                <img src="assets/logo/logo-ba.png" alt="Vibly Logo" class="w-32 h-32 hover-element transform transition-transform duration-500 hover:scale-110">
+            </div>
+            
+            <div class="relative inline-block p-1 mb-8">
+                <h1 class="font-display text-6xl md:text-7xl lg:text-8xl animate-slide-up hero-text hover-element">
+                    Vibly Studio
+                </h1>
+            </div>
+            
+            <div class="coming-soon-text text-4xl md:text-5xl mb-8 animate-slide-up hover-element" style="animation-delay: 0.2s">
+                Již Brzy
+            </div>
+            
+            <p class="text-xl md:text-2xl text-dark mb-12 animate-slide-up max-w-2xl mx-auto hover-element" style="animation-delay: 0.4s">
+                Připravujeme pro vás něco výjimečného. Moderní kreativní studio, 
+                které spojuje design, technologii a inovaci.
+            </p>
+            
+            <div class="space-y-8 animate-slide-up" style="animation-delay: 0.6s">
+                <div class="text-lg text-dark">
+                    Pro více informací nás kontaktujte na:
+                </div>
+                <a href="mailto:info@vbly.org" class="inline-block text-xl font-display text-black hover:text-dark transition-all duration-300 hover:scale-110 hover-element">
+                    info@vbly.org
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Initialize animations after DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Custom cursor
+            const cursor = document.getElementById('cursor');
+            const cursorBlur = document.getElementById('cursor-blur');
+            const hoverElements = document.querySelectorAll('.hover-element');
+
+            if (cursor && cursorBlur) {
+                document.addEventListener('mousemove', (e) => {
+                    requestAnimationFrame(() => {
+                        cursor.style.left = e.clientX + 'px';
+                        cursor.style.top = e.clientY + 'px';
+                        cursorBlur.style.left = e.clientX + 'px';
+                        cursorBlur.style.top = e.clientY + 'px';
+                    });
+                });
+
+                hoverElements.forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        cursor.classList.add('cursor-grow');
+                    });
+                    element.addEventListener('mouseleave', () => {
+                        cursor.classList.remove('cursor-grow');
+                    });
+                });
+            }
+
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                    document.body.style.overflow = 'visible';
+
+                    // Initialize GSAP animations
+                    gsap.from('.animate-slide-up', {
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        stagger: 0.2,
+                        ease: 'power3.out'
+                    });
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
